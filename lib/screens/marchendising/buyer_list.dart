@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:menu_bar/model/buyer.dart';
 
 class BuyerListScreen extends StatefulWidget {
+  const BuyerListScreen({super.key});
+
   @override
-  _BuyerListScreenState createState() => _BuyerListScreenState();
+  BuyerListScreenState createState() => BuyerListScreenState();
 }
 
-class _BuyerListScreenState extends State<BuyerListScreen> {
+class BuyerListScreenState extends State<BuyerListScreen> {
   List<Buyer> buyers = [];
 
   void deleteBuyer(Buyer buyer) {
@@ -28,7 +30,7 @@ class _BuyerListScreenState extends State<BuyerListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Buyer List")),
+      appBar: AppBar(title: const Text("Buyer List")),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -37,10 +39,10 @@ class _BuyerListScreenState extends State<BuyerListScreen> {
               alignment: Alignment.centerRight,
               child: ElevatedButton(
                 onPressed: downloadReport,
-                child: Text("Download"),
+                child: const Text("Download"),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Expanded(
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -68,11 +70,11 @@ class _BuyerListScreenState extends State<BuyerListScreen> {
                             children: [
                               IconButton(
                                 onPressed: () => editBuyer(buyer),
-                                icon: Icon(Icons.edit, color: Colors.green),
+                                icon:const Icon(Icons.edit, color: Colors.green),
                               ),
                               IconButton(
                                 onPressed: () => deleteBuyer(buyer),
-                                icon: Icon(Icons.delete, color: Colors.red),
+                                icon: const Icon(Icons.delete, color: Colors.red),
                               ),
                             ],
                           ),

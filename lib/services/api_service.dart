@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:menu_bar/model/buyer.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://10.0.2.2:8080'; // Localhost for Android emulator
+  static const String baseUrl = 'http://192.168.0.106:8080'; // Localhost for Android emulator
 
   // GET all buyers
   Future<List<Buyer>> getAllBuyers() async {

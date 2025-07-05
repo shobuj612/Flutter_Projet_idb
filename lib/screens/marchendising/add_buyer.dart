@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:menu_bar/model/buyer.dart';
 
 class AddBuyerScreen extends StatefulWidget {
+  const AddBuyerScreen({super.key});
   @override
-  _AddBuyerScreenState createState() => _AddBuyerScreenState();
+  AddBuyerScreenState createState() => AddBuyerScreenState();
 }
 
 //  FIXED: Moved this class **outside** of AddBuyerScreen
-class _AddBuyerScreenState extends State<AddBuyerScreen> {
+class AddBuyerScreenState extends State<AddBuyerScreen> {
   final _formKey = GlobalKey<FormState>();
 
   Buyer buyer = Buyer(
@@ -23,7 +24,7 @@ class _AddBuyerScreenState extends State<AddBuyerScreen> {
     if (_formKey.currentState!.validate()) {
       print('Submitting: ${buyer.toJson()}');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Submitted')),
+        const SnackBar(content: Text('Submitted')),
       );
     }
   }

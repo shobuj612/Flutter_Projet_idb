@@ -1,3 +1,47 @@
+
+class Buyer {
+  int? buyerId;
+  String buyerName;
+  String contactPerson;
+  String email;
+  String phone;
+  String address;
+
+  Buyer({
+    this.buyerId,
+    required this.buyerName,
+    required this.contactPerson,
+    required this.email,
+    required this.phone,
+    required this.address,
+  });
+
+  // From backend response (camelCase)
+  factory Buyer.fromJson(Map<String, dynamic> json) {
+    return Buyer(
+      buyerId: json['buyerId'],
+      buyerName: json['buyerName'],
+      contactPerson: json['contactPerson'],
+      email: json['email'],
+      phone: json['phone'],
+      address: json['address'],
+    );
+  }
+
+  // To backend (camelCase)
+  Map<String, dynamic> toJson() {
+    return {
+      'buyerId': buyerId,
+      'buyerName': buyerName,
+      'contactPerson': contactPerson,
+      'email': email,
+      'phone': phone,
+      'address': address,
+    };
+  }
+}
+
+/*
 class Buyer{
   int? buyerId;
 String buyerName;
@@ -39,3 +83,4 @@ String address;
      };
    }
 }
+*/

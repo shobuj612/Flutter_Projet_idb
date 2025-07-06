@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginService {
-  static const String baseUrl = 'http://192.168.0.100:8080/api';
+  static const String baseUrl = 'http://192.168.0.103:8080/api';
 
   /// Sends login data to the backend and stores the JWT token if successful.
   Future<void> postLoginInformation(Map<String, dynamic> loginData) async {
@@ -24,7 +24,7 @@ class LoginService {
 
           // Save the token in shared preferences
           final prefs = await SharedPreferences.getInstance();
-          await prefs.setString('auth-token', token);
+          await prefs.setString('jwt-token', token);
 
           print('Token saved: $token');
         } else {

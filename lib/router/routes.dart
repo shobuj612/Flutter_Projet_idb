@@ -31,7 +31,7 @@ import 'package:menu_bar/screens/warehouse/add_warehouse.dart';
 import 'package:menu_bar/screens/warehouse/warehouse_list.dart';
 
 final routes=<String,WidgetBuilder>{
-'/':(context)=>HomeScreen(),
+'/':(context)=>const HomeScreen(),
 '/login':(context)=>const LoginScreen(),
 // this is for admin
 '/attendencelist':(context)=>const AttendenceListScreen(),

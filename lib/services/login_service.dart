@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginService {
-  static const String baseUrl = 'http://192.168.0.103:8080/api';
+  static const String baseUrl = 'http://192.168.0.104:8080/api';
 
   /// Sends login data to the backend and stores the JWT token if successful.
   Future<void> postLoginInformation(Map<String, dynamic> loginData) async {

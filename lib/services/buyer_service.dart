@@ -11,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
   static const String baseUrl =
-      'http://192.168.0.103:8080/buyer'; // Localhost for Android emulator
+      'http://192.168.0.104:8080/buyer'; // Localhost for Android emulator
   // get the token from the storage
 
   // GET all buyers
@@ -118,7 +118,7 @@ class ApiService {
       'Authorization': 'Bearer $token',
     };
 
-    const url = 'http://192.168.0.103:8080/api/report/buyer';
+    const url = 'http://192.168.0.104:8080/api/report/buyer';
 
     final response = await http.get(
       Uri.parse(url),

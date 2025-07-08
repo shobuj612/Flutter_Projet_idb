@@ -41,7 +41,7 @@ Map<String,dynamic> toJson(){
   return{
         'order_id':orderId,
         'buyer':{
-          'buyer_id':buyer.buyerId
+          'buyerId':buyer.buyerId //'buyer_id':buyer.buyer_id
         },
         'order_name':orderName,
         'style_no':styleNo,
@@ -52,8 +52,6 @@ Map<String,dynamic> toJson(){
   };
 }
 }
-
-
 
 
 

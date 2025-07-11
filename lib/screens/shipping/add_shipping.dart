@@ -28,7 +28,8 @@ class _AddShippingScreenState extends State<AddShippingScreen> {
     super.initState();
     fetchOrders();
     if (widget.shipping != null) {
-      _shippingDateController.text = widget.shipping!.shippingDate.toIso8601String().split("T").first;
+      _shippingDateController.text =
+          widget.shipping!.shippingDate.toIso8601String().split("T").first;
       _shippedQtyController.text = widget.shipping!.shippedQty.toString();
       _invoiceNoController.text = widget.shipping!.invoiceNo;
       _destinationController.text = widget.shipping!.destination;
@@ -121,21 +122,36 @@ class _AddShippingScreenState extends State<AddShippingScreen> {
                     _selectedOrder = newValue;
                   });
                 },
-                validator: (val) => val == null ? 'Please select an order' : null,
+                validator: (val) =>
+                    val == null ? 'Please select an order' : null,
               ),
               TextFormField(
                 controller: _shippingDateController,
-                decoration:
-                    const InputDecoration(labelText: 'Shipping Date (yyyy-mm-dd)'),
+                decoration: const InputDecoration(
+                    labelText: 'Shipping Date (yyyy-mm-dd)',
+                    suffixIcon: Icon(Icons.calendar_today)),
+                onTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100));
+                  if (pickedDate != null) {
+                    _shippingDateController.text =
+                        pickedDate.toIso8601String().split('T').first;
+                  }
+                },
                 validator: (val) =>
                     val == null || val.isEmpty ? 'Enter shipping date' : null,
               ),
               TextFormField(
                 controller: _shippedQtyController,
-                decoration: const InputDecoration(labelText: 'Shipped Quantity'),
+                decoration:
+                    const InputDecoration(labelText: 'Shipped Quantity'),
                 keyboardType: TextInputType.number,
-                validator: (val) =>
-                    val == null || val.isEmpty ? 'Enter shipped quantity' : null,
+                validator: (val) => val == null || val.isEmpty
+                    ? 'Enter shipped quantity'
+                    : null,
               ),
               TextFormField(
                 controller: _invoiceNoController,

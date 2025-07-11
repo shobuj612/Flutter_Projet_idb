@@ -129,29 +129,53 @@ class _AddCuttingScreenState extends State<AddCuttingScreen> {
               ),
               TextFormField(
                 controller: _startDateController,
-                decoration:
-                    const InputDecoration(labelText: 'Start Date (YYYY-MM-DD)'),
+                decoration: const InputDecoration(
+                    labelText: 'Start Date (YYYY-MM-DD)',
+                    suffixIcon: Icon(Icons.calendar_today)),
+                onTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100));
+                  if (pickedDate != null) {
+                    _startDateController.text =
+                        pickedDate.toIso8601String().split('T').first;
+                  }
+                },
                 validator: (val) =>
                     val == null || val.isEmpty ? 'Enter start date' : null,
               ),
               TextFormField(
                 controller: _endDateController,
-                decoration:
-                    const InputDecoration(labelText: 'End Date (YYYY-MM-DD)'),
+                decoration: const InputDecoration(
+                    labelText: 'End Date (YYYY-MM-DD)',
+                    suffixIcon: Icon(Icons.calendar_today)),
+                onTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100));
+                  if (pickedDate != null) {
+                    _endDateController.text =
+                        pickedDate.toIso8601String().split('T').first;
+                  }
+                },
                 validator: (val) =>
                     val == null || val.isEmpty ? 'Enter end date' : null,
               ),
               TextFormField(
                 controller: _qtyController,
-                decoration: const InputDecoration(labelText: 'Cutting Quantity'),
+                decoration:
+                    const InputDecoration(labelText: 'Cutting Quantity'),
                 keyboardType: TextInputType.number,
                 validator: (val) =>
                     val == null || val.isEmpty ? 'Enter quantity' : null,
               ),
               TextFormField(
                 controller: _supervisorController,
-                decoration:
-                    const InputDecoration(labelText: 'Supervisor Name'),
+                decoration: const InputDecoration(labelText: 'Supervisor Name'),
                 validator: (val) =>
                     val == null || val.isEmpty ? 'Enter supervisor name' : null,
               ),

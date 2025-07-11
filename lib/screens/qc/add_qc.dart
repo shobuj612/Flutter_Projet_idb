@@ -15,7 +15,8 @@ class AddQcScreen extends StatefulWidget {
 
 class _AddQcScreenState extends State<AddQcScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _inspectionDateController = TextEditingController();
+  final TextEditingController _inspectionDateController =
+      TextEditingController();
   final TextEditingController _passedQtyController = TextEditingController();
   final TextEditingController _rejectedQtyController = TextEditingController();
   final TextEditingController _remarksController = TextEditingController();
@@ -29,7 +30,8 @@ class _AddQcScreenState extends State<AddQcScreen> {
     fetchOrders(); // Fetch orders from OrderService
 
     if (widget.qc != null) {
-      _inspectionDateController.text = widget.qc!.inspectionDate.toIso8601String().split("T").first;
+      _inspectionDateController.text =
+          widget.qc!.inspectionDate.toIso8601String().split("T").first;
       _passedQtyController.text = widget.qc!.passedQty.toString();
       _rejectedQtyController.text = widget.qc!.rejectedQty.toString();
       _remarksController.text = widget.qc!.remarks;
@@ -70,7 +72,8 @@ class _AddQcScreenState extends State<AddQcScreen> {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(widget.qc == null ? 'QC record added' : 'QC record updated'),
+            content: Text(
+                widget.qc == null ? 'QC record added' : 'QC record updated'),
           ),
         );
         Navigator.pop(context);
@@ -123,25 +126,44 @@ class _AddQcScreenState extends State<AddQcScreen> {
               ),
               TextFormField(
                 controller: _inspectionDateController,
-                decoration: const InputDecoration(labelText: 'Inspection Date (yyyy-mm-dd)'),
-                validator: (val) => val == null || val.isEmpty ? 'Enter date' : null,
+                decoration: const InputDecoration(
+                    labelText: 'Inspection Date (yyyy-mm-dd)',
+                    suffixIcon: Icon(Icons.calendar_today)),
+                onTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100));
+                  if (pickedDate != null) {
+                    _inspectionDateController.text =
+                        pickedDate.toIso8601String().split('T').first;
+                  }
+                },
+                validator: (val) =>
+                    val == null || val.isEmpty ? 'Enter date' : null,
               ),
               TextFormField(
                 controller: _passedQtyController,
                 decoration: const InputDecoration(labelText: 'Passed Quantity'),
                 keyboardType: TextInputType.number,
-                validator: (val) => val == null || val.isEmpty ? 'Enter passed quantity' : null,
+                validator: (val) =>
+                    val == null || val.isEmpty ? 'Enter passed quantity' : null,
               ),
               TextFormField(
                 controller: _rejectedQtyController,
-                decoration: const InputDecoration(labelText: 'Rejected Quantity'),
+                decoration:
+                    const InputDecoration(labelText: 'Rejected Quantity'),
                 keyboardType: TextInputType.number,
-                validator: (val) => val == null || val.isEmpty ? 'Enter rejected quantity' : null,
+                validator: (val) => val == null || val.isEmpty
+                    ? 'Enter rejected quantity'
+                    : null,
               ),
               TextFormField(
                 controller: _remarksController,
                 decoration: const InputDecoration(labelText: 'Remarks'),
-                validator: (val) => val == null || val.isEmpty ? 'Enter remarks' : null,
+                validator: (val) =>
+                    val == null || val.isEmpty ? 'Enter remarks' : null,
               ),
               const SizedBox(height: 20),
               ElevatedButton(

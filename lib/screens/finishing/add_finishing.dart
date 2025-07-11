@@ -28,7 +28,8 @@ class _AddFinishingScreenState extends State<AddFinishingScreen> {
     fetchOrders();
 
     if (widget.finishing != null) {
-      _dateController.text = widget.finishing!.finishingDate.toIso8601String().split("T").first;
+      _dateController.text =
+          widget.finishing!.finishingDate.toIso8601String().split("T").first;
       _qtyController.text = widget.finishing!.finishQty.toString();
       _packingController.text = widget.finishing!.packingDone;
       _selectedOrder = widget.finishing!.order;
@@ -121,20 +122,36 @@ class _AddFinishingScreenState extends State<AddFinishingScreen> {
               ),
               TextFormField(
                 controller: _dateController,
-                decoration:
-                    const InputDecoration(labelText: 'Finishing Date (yyyy-mm-dd)'),
-                validator: (val) => val == null || val.isEmpty ? 'Enter date' : null,
+                decoration: const InputDecoration(
+                    labelText: 'Finishing Date (yyyy-mm-dd)',
+                    suffixIcon: Icon(Icons.calendar_today)),
+                onTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100));
+                  if (pickedDate != null) {
+                    _dateController.text =
+                        pickedDate.toIso8601String().split('T').first;
+                  }
+                },
+                validator: (val) =>
+                    val == null || val.isEmpty ? 'Enter date' : null,
               ),
               TextFormField(
                 controller: _qtyController,
-                decoration: const InputDecoration(labelText: 'Finished Quantity'),
+                decoration:
+                    const InputDecoration(labelText: 'Finished Quantity'),
                 keyboardType: TextInputType.number,
-                validator: (val) => val == null || val.isEmpty ? 'Enter quantity' : null,
+                validator: (val) =>
+                    val == null || val.isEmpty ? 'Enter quantity' : null,
               ),
               TextFormField(
                 controller: _packingController,
                 decoration: const InputDecoration(labelText: 'Packing Done'),
-                validator: (val) => val == null || val.isEmpty ? 'Enter packing status' : null,
+                validator: (val) =>
+                    val == null || val.isEmpty ? 'Enter packing status' : null,
               ),
               const SizedBox(height: 20),
               ElevatedButton(

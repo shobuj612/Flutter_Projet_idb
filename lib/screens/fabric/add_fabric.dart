@@ -31,7 +31,8 @@ class _AddFabricScreenState extends State<AddFabricScreen> {
     if (widget.fabric != null) {
       _typeController.text = widget.fabric!.fabricType;
       _qtyController.text = widget.fabric!.fabricQty.toString();
-      _dateController.text = widget.fabric!.receivedDate.toIso8601String().split("T").first;
+      _dateController.text =
+          widget.fabric!.receivedDate.toIso8601String().split("T").first;
       _stockController.text = widget.fabric!.availableStock.toString();
       _selectedOrder = widget.fabric!.order;
     }
@@ -126,24 +127,41 @@ class _AddFabricScreenState extends State<AddFabricScreen> {
               TextFormField(
                 controller: _typeController,
                 decoration: const InputDecoration(labelText: 'Fabric Type'),
-                validator: (val) => val == null || val.isEmpty ? 'Enter type' : null,
+                validator: (val) =>
+                    val == null || val.isEmpty ? 'Enter type' : null,
               ),
               TextFormField(
                 controller: _qtyController,
                 decoration: const InputDecoration(labelText: 'Fabric Quantity'),
                 keyboardType: TextInputType.number,
-                validator: (val) => val == null || val.isEmpty ? 'Enter quantity' : null,
+                validator: (val) =>
+                    val == null || val.isEmpty ? 'Enter quantity' : null,
               ),
               TextFormField(
                 controller: _dateController,
-                decoration: const InputDecoration(labelText: 'Received Date (yyyy-mm-dd)'),
-                validator: (val) => val == null || val.isEmpty ? 'Enter date' : null,
+                decoration: const InputDecoration(
+                    labelText: 'Received Date (yyyy-mm-dd)',
+                    suffixIcon: Icon(Icons.calendar_today)),
+                onTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100));
+                  if (pickedDate != null) {
+                    _dateController.text =
+                        pickedDate.toIso8601String().split('T').first;
+                  }
+                },
+                validator: (val) =>
+                    val == null || val.isEmpty ? 'Enter date' : null,
               ),
               TextFormField(
                 controller: _stockController,
                 decoration: const InputDecoration(labelText: 'Available Stock'),
                 keyboardType: TextInputType.number,
-                validator: (val) => val == null || val.isEmpty ? 'Enter stock' : null,
+                validator: (val) =>
+                    val == null || val.isEmpty ? 'Enter stock' : null,
               ),
               const SizedBox(height: 20),
               ElevatedButton(

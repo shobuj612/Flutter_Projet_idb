@@ -27,8 +27,10 @@ class _AddSewingScreenState extends State<AddSewingScreen> {
     fetchOrders();
 
     if (widget.sewing != null) {
-      _startDateController.text = widget.sewing!.sewingStartDate.toIso8601String().split("T").first;
-      _endDateController.text = widget.sewing!.sewingEndDate.toIso8601String().split("T").first;
+      _startDateController.text =
+          widget.sewing!.sewingStartDate.toIso8601String().split("T").first;
+      _endDateController.text =
+          widget.sewing!.sewingEndDate.toIso8601String().split("T").first;
       _qtyController.text = widget.sewing!.sewingQty.toString();
       _selectedOrder = widget.sewing!.order;
     }
@@ -66,13 +68,16 @@ class _AddSewingScreenState extends State<AddSewingScreen> {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(widget.sewing == null ? 'Sewing record added' : 'Sewing record updated'),
+            content: Text(widget.sewing == null
+                ? 'Sewing record added'
+                : 'Sewing record updated'),
           ),
         );
         Navigator.pop(context);
       } catch (e) {
         if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $e')));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Error: $e')));
       }
     }
   }
@@ -111,23 +116,53 @@ class _AddSewingScreenState extends State<AddSewingScreen> {
                     _selectedOrder = newValue;
                   });
                 },
-                validator: (val) => val == null ? 'Please select an order' : null,
+                validator: (val) =>
+                    val == null ? 'Please select an order' : null,
               ),
               TextFormField(
                 controller: _startDateController,
-                decoration: const InputDecoration(labelText: 'Sewing Start Date (yyyy-mm-dd)'),
-                validator: (val) => val == null || val.isEmpty ? 'Enter start date' : null,
+                decoration: const InputDecoration(
+                    labelText: 'Sewing Start Date (yyyy-mm-dd)',
+                    suffixIcon: Icon(Icons.calendar_today)),
+                onTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100));
+                  if (pickedDate != null) {
+                    _startDateController.text =
+                        pickedDate.toIso8601String().split('T').first;
+                  }
+                },
+                validator: (val) =>
+                    val == null || val.isEmpty ? 'Enter start date' : null,
               ),
               TextFormField(
                 controller: _endDateController,
-                decoration: const InputDecoration(labelText: 'Sewing End Date (yyyy-mm-dd)'),
-                validator: (val) => val == null || val.isEmpty ? 'Enter end date' : null,
+                decoration: const InputDecoration(
+                    labelText: 'Sewing End Date (yyyy-mm-dd)',
+                    suffixIcon: Icon(Icons.calendar_today)),
+                onTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100));
+                  if (pickedDate != null) {
+                    _endDateController.text =
+                        pickedDate.toIso8601String().split('T').first;
+                  }
+                },
+                validator: (val) =>
+                    val == null || val.isEmpty ? 'Enter end date' : null,
               ),
               TextFormField(
                 controller: _qtyController,
                 decoration: const InputDecoration(labelText: 'Sewing Quantity'),
                 keyboardType: TextInputType.number,
-                validator: (val) => val == null || val.isEmpty ? 'Enter quantity' : null,
+                validator: (val) =>
+                    val == null || val.isEmpty ? 'Enter quantity' : null,
               ),
               const SizedBox(height: 20),
               ElevatedButton(

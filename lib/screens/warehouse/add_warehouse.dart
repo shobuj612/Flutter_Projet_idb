@@ -112,12 +112,25 @@ class _AddWarehouseScreenState extends State<AddWarehouseScreen> {
                     _selectedOrder = newOrder;
                   });
                 },
-                validator: (val) => val == null ? 'Please select an order' : null,
+                validator: (val) =>
+                    val == null ? 'Please select an order' : null,
               ),
               TextFormField(
                 controller: _receivedDateController,
-                decoration:
-                    const InputDecoration(labelText: 'Received Date (yyyy-mm-dd)'),
+                decoration: const InputDecoration(
+                    labelText: 'Received Date (yyyy-mm-dd)',
+                    suffixIcon: Icon(Icons.calendar_today)),
+                onTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100));
+                  if (pickedDate != null) {
+                    _receivedDateController.text =
+                        pickedDate.toIso8601String().split('T').first;
+                  }
+                },
                 validator: (val) =>
                     val == null || val.isEmpty ? 'Enter received date' : null,
               ),

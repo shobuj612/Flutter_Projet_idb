@@ -4,12 +4,16 @@ import 'package:menu_bar/screens/admin/order_list.dart';
 import 'package:menu_bar/screens/admin/production_dashboard.dart';
 import 'package:menu_bar/screens/cutting/add_cutting.dart';
 import 'package:menu_bar/screens/cutting/cutting_lilst.dart';
+import 'package:menu_bar/screens/cutting/order_information_in_cutting.dart';
 import 'package:menu_bar/screens/design/add_design.dart';
 import 'package:menu_bar/screens/design/design_list.dart';
+import 'package:menu_bar/screens/design/order_information_in_design.dart';
 import 'package:menu_bar/screens/fabric/add_fabric.dart';
 import 'package:menu_bar/screens/fabric/fabric_list.dart';
+import 'package:menu_bar/screens/fabric/order_information_in_fabric.dart';
 import 'package:menu_bar/screens/finishing/add_finishing.dart';
 import 'package:menu_bar/screens/finishing/finishing_list.dart';
+import 'package:menu_bar/screens/finishing/order_information_in_finishing.dart';
 import 'package:menu_bar/screens/hrscreen/employee_attendence_list.dart';
 import 'package:menu_bar/screens/hrscreen/employee_payment.dart';
 import 'package:menu_bar/screens/hrscreen/employee_registration.dart';
@@ -22,12 +26,16 @@ import 'package:menu_bar/screens/marchendising/buyer_list.dart';
 import 'package:menu_bar/screens/home_screen.dart';
 import 'package:menu_bar/screens/login.dart';
 import 'package:menu_bar/screens/qc/add_qc.dart';
+import 'package:menu_bar/screens/qc/order_information_in_qc.dart';
 import 'package:menu_bar/screens/qc/qc_list.dart';
 import 'package:menu_bar/screens/sewing/add_sewing.dart';
+import 'package:menu_bar/screens/sewing/order_information_in_sewing.dart';
 import 'package:menu_bar/screens/sewing/sewing_list.dart';
 import 'package:menu_bar/screens/shipping/add_shipping.dart';
+import 'package:menu_bar/screens/shipping/order_information_in_shipping.dart';
 import 'package:menu_bar/screens/shipping/shipping_list.dart';
 import 'package:menu_bar/screens/warehouse/add_warehouse.dart';
+import 'package:menu_bar/screens/warehouse/order_information_in_warehouse.dart';
 import 'package:menu_bar/screens/warehouse/warehouse_list.dart';
 
 final routes=<String,WidgetBuilder>{
@@ -71,8 +79,16 @@ final routes=<String,WidgetBuilder>{
 '/shippinglist':(context)=>const ShippingListScreen(),
 // this is for warehouse
 '/addwarehouse':(context)=>const AddWarehouseScreen(),
-'/warehouselist':(context)=>const WarehouseListScreen()
-
+'/warehouselist':(context)=>const WarehouseListScreen(),
+// this is extara route for every tab
+'/orderincutting':(context)=> const OrderInformationInCutting(),
+'/orderindesign':(context)=> const OrderInformationInDesign(),
+'/orderinfabric':(context)=> const OrderInformationInFabric(),
+'/orderinfinishing':(context)=> const OrderInformationInFinishing(),
+'/orderinqc':(context)=> const OrderInformationInQc(),
+'/orderinsew':(context)=> const OrderInformationInwSewing(),
+'/orderinship':(context)=> const OrderInformationInShipping(),
+'/orderinwarehouse':(context)=> const OrderInformationInWarehouse()
 
 };
 /**

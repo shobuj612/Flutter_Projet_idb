@@ -27,6 +27,8 @@ class _LoginScreenState extends State<LoginScreen> {
         if (!mounted) return;
         ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text('login success')));
+            // after successful login go back to the homescreen
+            Navigator.pop(context);
       }
       // this is end of try
       catch (e) {

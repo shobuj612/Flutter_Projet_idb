@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,32 +19,33 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Check if token is saved in SharedPreferences
   void checkLoginStatus() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String? token = prefs.getString('auth-token');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('jwt-token');
 
-  if (!mounted) return; // ✅ this prevents using setState on disposed widget
+    if (!mounted) return; // ✅ this prevents using setState on disposed widget
 
-  setState(() {
-    isLoggIn = token != null;
-  });
-}
+    setState(() {
+      isLoggIn = token != null;
+    });
+  }
 
   // Optional: Logout
   void logout() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.remove('auth-token');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('jwt-token');
 
-  if (!mounted) return; // ✅ check before using context or setState
+    if (!mounted) return; // ✅ check before using context or setState
 
-  setState(() {
-    isLoggIn = false;
-  });
+    setState(() {
+      isLoggIn = false;
+      // this to when the logout
+      // Navigator.pushNamed(context, '/login');
+    });
 
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(content: Text("Logged out")),
-  );
-}
-
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Logged out")),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,17 +56,21 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           if (!isLoggIn)
             TextButton(
-              onPressed: () => Navigator.pushNamed(context, '/login'),
+              onPressed: () => Navigator.pushNamed(context, '/login').then((_) {
+                checkLoginStatus(); // 🔄 re-check token after coming back
+              }),
               child: const Text("Login", style: TextStyle(color: Colors.white)),
             ),
           if (isLoggIn)
             TextButton(
               onPressed: logout,
-              child: const Text("Logout", style: TextStyle(color: Colors.white)),
+              child:
+                  const Text("Logout", style: TextStyle(color: Colors.white)),
             ),
         ],
       ),
-      drawer: Drawer(
+      drawer:isLoggIn?
+       Drawer(
         child: Container(
           color: const Color(0xFF0dabdf),
           child: ListView(
@@ -74,73 +78,88 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               const DrawerHeader(
                 decoration: BoxDecoration(color: Colors.blue),
-                child: Text("Sidebar Menu", style: TextStyle(color: Colors.white)),
+                child:
+                    Text("Sidebar Menu", style: TextStyle(color: Colors.white)),
               ),
-
-              buildExpansionTile(context, 'Admin', [
-                buildNavItem(context, "Attendance List", '/attendencelist'),
-                buildNavItem(context, "Order List", '/orderlist'),
-                buildNavItem(context, "Production Dashboard", '/production'),
-              ]),
+              //buildExpansionTile(context, 'Admin', [
+              //buildNavItem(context, "Attendance List", '/attendencelist'),
+              //buildNavItem(context, "Order List", '/orderlist'),
+              //buildNavItem(context, "Production Dashboard", '/production'),
+              // ]), this is now stopped for the project
+              // this is for marchendising
 
               buildExpansionTile(context, 'Marchendising', [
-                buildNavItem(context, "Dashboard", '/dahsboard'),
+                // buildNavItem(context, "Dashboard", '/dahsboard'),
                 buildNavItem(context, "Add Buyer", '/ab'),
                 buildNavItem(context, "Buyer List", '/bl'),
                 buildNavItem(context, "Add Order", '/addorder'),
                 buildNavItem(context, "Order List", '/marchorderlist'),
-                buildNavItem(context, "Job Post", '/jobpost'),
+                //buildNavItem(context, "Job Post", '/jobpost'),
               ]),
+              // this is for Design
 
               buildExpansionTile(context, 'Design', [
                 buildNavItem(context, "Add Design", '/adddesign'),
                 buildNavItem(context, "Design List", '/designlist'),
+                buildNavItem(context, "Order Information", '/orderindesign'),
               ]),
 
+              // this is for fabric
               buildExpansionTile(context, 'Fabric', [
                 buildNavItem(context, "Add Fabric", '/addfabric'),
                 buildNavItem(context, "Fabric List", '/fabriclist'),
+                // buildNavItem(context, "Fabric List", '/fabriclist'),
+                buildNavItem(context, "Order Information", '/orderinfabric'),
               ]),
-
+              // this is for cutting
               buildExpansionTile(context, 'Cutting', [
                 buildNavItem(context, "Add Cutting", '/addcutting'),
                 buildNavItem(context, "Cutting List", '/cuttinglist'),
+                buildNavItem(context, "Order Information", '/orderincutting'),
               ]),
 
+              // this is for sewing
               buildExpansionTile(context, 'Sewing', [
                 buildNavItem(context, "Add Sewing", '/addsewing'),
                 buildNavItem(context, "Sewing List", '/sewinglist'),
+                buildNavItem(context, "Order Information", '/orderinsew'),
               ]),
-
+              // this is for finishing
               buildExpansionTile(context, 'Finishing', [
                 buildNavItem(context, "Add Finishing", '/addfinishing'),
                 buildNavItem(context, "Finishing List", '/finishinglist'),
+                buildNavItem(context, "Order Information", '/orderinfinishing'),
               ]),
-
+              // this is quality control
               buildExpansionTile(context, 'Quality Control', [
                 buildNavItem(context, "Add QC", '/addqc'),
                 buildNavItem(context, "QC List", '/qclist'),
+                buildNavItem(context, "Order Information", '/orderinqc'),
               ]),
-
+              // this is for warehouse
               buildExpansionTile(context, 'Warehouse', [
                 buildNavItem(context, "Add Warehouse", '/addwarehouse'),
                 buildNavItem(context, "Warehouse List", '/warehouselist'),
+                buildNavItem(context, "Order Information", '/orderinwarehouse'),
               ]),
-
+              // this is for shipping
               buildExpansionTile(context, 'Shipping', [
                 buildNavItem(context, "Add Shipping", '/addshipping'),
                 buildNavItem(context, "Shipping List", '/shippinglist'),
+                buildNavItem(context, "Order Information", '/orderinship'),
               ]),
-
-              buildExpansionTile(context, 'HR', [
-                buildNavItem(context, "Employee Attendance", '/employeeattendence'),
-                buildNavItem(context, "Employee Payment", '/employeepayment'),
-                buildNavItem(context, "Employee Registration", '/employeeregis'),
-              ]),
+              //buildExpansionTile(context, 'HR', [
+              // buildNavItem(
+              //    context, "Employee Attendance", '/employeeattendence'),
+              //  buildNavItem(context, "Employee Payment", '/employeepayment'),
+              //  buildNavItem(
+              // context, "Employee Registration", '/employeeregis'),
+              //]),
             ],
           ),
         ),
-      ),
+      )
+      :null,
       body: const Center(
         child: Text("Welcome to the Garment Company"),
       ),

@@ -95,6 +95,7 @@ class _OrderListScreenState extends State<OrderListScreen> {
                     (Set<WidgetState> states) => Colors.white,
                   ),
                   columns: const [
+                    DataColumn(label: Text("Order Id")),
                     DataColumn(label: Text("Order Name")),
                     DataColumn(label: Text("Buyer")),
                     DataColumn(label: Text("Style No")),
@@ -107,6 +108,7 @@ class _OrderListScreenState extends State<OrderListScreen> {
                   rows: orders.map((order) {
                     return DataRow(
                       cells: [
+                         DataCell(Text(order.orderId.toString())),
                         DataCell(Text(order.orderName)),
                         DataCell(Text(order.buyer.buyerName)),
                         DataCell(Text(order.styleNo)),

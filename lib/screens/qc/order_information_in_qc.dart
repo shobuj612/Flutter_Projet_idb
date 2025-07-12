@@ -45,9 +45,9 @@ OrderInformationInQcScreenState createState()=> OrderInformationInQcScreenState(
         scrollDirection: Axis.horizontal,
         child: DataTable(
           columns: const[
-            DataColumn(label: Text('order id')),
-            DataColumn(label: Text('buyer id')),
-            DataColumn(label: Text('order name')),
+            DataColumn(label: Text('Order Id')),
+            DataColumn(label: Text('Order Name')),
+            DataColumn(label: Text('Buyer Name')),
             DataColumn(label: Text('order quantity')),
             DataColumn(label: Text('order style')),
             DataColumn(label: Text('order date')),
@@ -58,7 +58,7 @@ OrderInformationInQcScreenState createState()=> OrderInformationInQcScreenState(
             return DataRow(
               cells:[
                 DataCell(Text(order.orderId.toString())),
-                DataCell(Text(order.buyer.buyerId.toString())),
+                DataCell(Text(order.buyer.buyerName)),
                 DataCell(Text(order.orderName)),
                 DataCell(Text(order.styleNo)),
                 DataCell(Text(order.orderQty.toString())),

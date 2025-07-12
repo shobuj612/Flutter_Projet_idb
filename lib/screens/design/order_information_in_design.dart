@@ -49,8 +49,9 @@ class OrderInformationInDesign extends StatefulWidget{
         scrollDirection: Axis.horizontal,
         child: DataTable(
           columns: const [
+            DataColumn(label: Text('Order Id')),
             DataColumn(label: Text('Order Name')),
-            DataColumn(label: Text('Buyer')),
+            DataColumn(label: Text('Buyer Name')),
             DataColumn(label: Text('StyleNo')),
             DataColumn(label: Text('Order Qty')),
             DataColumn(label: Text('OrderDate')),
@@ -60,8 +61,9 @@ class OrderInformationInDesign extends StatefulWidget{
           rows:orders.map((order){
             return DataRow(
               cells:[
+                 DataCell(Text(order.orderId.toString())),
                 DataCell(Text(order.orderName)),
-                DataCell(Text(order.buyer.buyerId.toString())),
+                DataCell(Text(order.buyer.buyerName)),
                 DataCell(Text(order.styleNo)),
                 DataCell(Text(order.orderQty.toString())),
                 DataCell(Text(order.orderDate.toLocal().toString().split(' ')[0])),

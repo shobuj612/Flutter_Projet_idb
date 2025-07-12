@@ -44,8 +44,9 @@ class OrderInformationInCuttingScreenState
      scrollDirection: Axis.horizontal,
       child:DataTable(
       columns: const[
+        DataColumn(label: Text('Order Id')),
        DataColumn(label: Text('Order Name')),
-       DataColumn(label: Text('Buyer')),
+       DataColumn(label: Text('Buyer Name')),
        DataColumn(label: Text('Style_no')),
        DataColumn(label: Text('Qty')),
        DataColumn(label: Text('Order date')),
@@ -55,6 +56,7 @@ class OrderInformationInCuttingScreenState
     rows:orders.map((order){
      return DataRow(
       cells:[
+        DataCell(Text(order.orderId.toString())),
         DataCell(Text(order.orderName)),
         DataCell(Text(order.buyer.buyerName)),
         DataCell(Text(order.styleNo)),

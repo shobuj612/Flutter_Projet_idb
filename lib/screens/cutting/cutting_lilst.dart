@@ -84,11 +84,13 @@ class _CuttingListScreenState extends State<CuttingListScreen> {
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
                   columns: const [
-                    DataColumn(label: Text("ID")),
+                    DataColumn(label: Text("Cutting ID")),
                     DataColumn(label: Text("Order ID")),
+                    DataColumn(label: Text("Order Name")),// this is new added
+                    DataColumn(label: Text("Order StyleNo")),// this new added
                     DataColumn(label: Text("Start Date")),
                     DataColumn(label: Text("End Date")),
-                    DataColumn(label: Text("Qty")),
+                    DataColumn(label: Text("Cutting Quantity")),
                     DataColumn(label: Text("Supervisor")),
                     DataColumn(label: Text("Action")),
                   ],
@@ -97,6 +99,8 @@ class _CuttingListScreenState extends State<CuttingListScreen> {
                       cells: [
                         DataCell(Text(cutting.cuttingId?.toString() ?? '')),
                         DataCell(Text(cutting.order.orderId?.toString() ?? '')),
+                        DataCell(Text(cutting.order.orderName)),
+                        DataCell(Text(cutting.order.styleNo)),
                         DataCell(Text(cutting.cuttingStartDate.toIso8601String())),
                         DataCell(Text(cutting.cuttingEndDate.toIso8601String())),
                         DataCell(Text(cutting.cuttingQty.toString())),

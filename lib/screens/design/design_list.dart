@@ -84,9 +84,11 @@ class _DesignListScreenState extends State<DesignListScreen> {
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
                   columns: const [
-                    DataColumn(label: Text("ID")),
+                    DataColumn(label: Text(" Design ID")),
                     DataColumn(label: Text("Order ID")),
-                    DataColumn(label: Text("Name")),
+                    DataColumn(label: Text("Order Name")),// this is new added
+                    DataColumn(label: Text("Order StyleNo")),// this is new added
+                    DataColumn(label: Text(" Design Name")),
                     DataColumn(label: Text("Image URL")),
                     DataColumn(label: Text("Status")),
                     DataColumn(label: Text("Remarks")),
@@ -97,6 +99,8 @@ class _DesignListScreenState extends State<DesignListScreen> {
                       cells: [
                         DataCell(Text(design.designId?.toString() ?? '')),
                         DataCell(Text(design.order.orderId?.toString() ?? '')),
+                        DataCell(Text(design.order.orderName)),
+                        DataCell(Text(design.order.styleNo)),
                         DataCell(Text(design.designName)),
                         DataCell(Text(design.designImageUrl)),
                         DataCell(Text(design.status)),

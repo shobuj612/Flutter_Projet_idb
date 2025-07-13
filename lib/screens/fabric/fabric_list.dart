@@ -84,8 +84,10 @@ class _FabricListScreenState extends State<FabricListScreen> {
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
                   columns: const [
-                    DataColumn(label: Text("ID")),
+                    DataColumn(label: Text("Fabric ID")),
                     DataColumn(label: Text("Order ID")),
+                    DataColumn(label: Text("Order Name")),// this is new added
+                    DataColumn(label: Text("Order StyleNo")),// this is new added
                     DataColumn(label: Text("Type")),
                     DataColumn(label: Text("Qty")),
                     DataColumn(label: Text("Received")),
@@ -97,6 +99,8 @@ class _FabricListScreenState extends State<FabricListScreen> {
                       cells: [
                         DataCell(Text(fabric.fabricId?.toString() ?? '')),
                         DataCell(Text(fabric.order.orderId?.toString() ?? '')),
+                        DataCell(Text(fabric.order.orderName)),
+                        DataCell(Text(fabric.order.styleNo)),
                         DataCell(Text(fabric.fabricType)),
                         DataCell(Text(fabric.fabricQty.toString())),
                         DataCell(Text(fabric.receivedDate.toLocal().toString().split(" ")[0])),

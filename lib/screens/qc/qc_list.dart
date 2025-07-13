@@ -86,6 +86,8 @@ class _QcListScreenState extends State<QcListScreen> {
                   columns: const [
                     DataColumn(label: Text("QC ID")),
                     DataColumn(label: Text("Order ID")),
+                    DataColumn(label: Text("Order Name")),// this is new added
+                    DataColumn(label: Text("Order StyleNo")),// this is new added
                     DataColumn(label: Text("Inspection Date")),
                     DataColumn(label: Text("Passed Qty")),
                     DataColumn(label: Text("Rejected Qty")),
@@ -97,6 +99,8 @@ class _QcListScreenState extends State<QcListScreen> {
                       cells: [
                         DataCell(Text(qc.qcId?.toString() ?? '')),
                         DataCell(Text(qc.order.orderId?.toString() ?? '')),
+                        DataCell(Text(qc.order.orderName)),
+                        DataCell(Text(qc.order.styleNo)),
                         DataCell(Text(qc.inspectionDate.toLocal().toString().split(' ')[0])),
                         DataCell(Text(qc.passedQty.toString())),
                         DataCell(Text(qc.rejectedQty.toString())),

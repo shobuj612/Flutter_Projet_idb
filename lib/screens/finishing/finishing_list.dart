@@ -84,8 +84,10 @@ class _FinishingListScreenState extends State<FinishingListScreen> {
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
                   columns: const [
-                    DataColumn(label: Text("ID")),
+                    DataColumn(label: Text("Finishing ID")),
                     DataColumn(label: Text("Order ID")),
+                    DataColumn(label: Text("Order Name")),// this is new added
+                    DataColumn(label: Text("Order StyleNo")),// this is new added
                     DataColumn(label: Text("Date")),
                     DataColumn(label: Text("Qty")),
                     DataColumn(label: Text("Packing")),
@@ -95,6 +97,8 @@ class _FinishingListScreenState extends State<FinishingListScreen> {
                     return DataRow(cells: [
                       DataCell(Text(f.finishId?.toString() ?? '')),
                       DataCell(Text(f.order.orderId?.toString() ?? '')),
+                      DataCell(Text(f.order.orderName)),
+                      DataCell(Text(f.order.styleNo)),
                       DataCell(Text(f.finishingDate.toLocal().toString().split(' ')[0])),
                       DataCell(Text(f.finishQty.toString())),
                       DataCell(Text(f.packingDone)),

@@ -104,6 +104,8 @@ class _ShippingListScreenState extends State<ShippingListScreen> {
                   columns: const [
                     DataColumn(label: Text('Shipping ID')),
                     DataColumn(label: Text('Order ID')),
+                    DataColumn(label: Text('Order Name')),// this is new added
+                    DataColumn(label: Text('Order StyleNo')),// this is new added
                     DataColumn(label: Text('Shipping Date')),
                     DataColumn(label: Text('Shipped Qty')),
                     DataColumn(label: Text('Invoice No')),
@@ -116,6 +118,8 @@ class _ShippingListScreenState extends State<ShippingListScreen> {
                       cells: [
                         DataCell(Text(shipping.shippingId?.toString() ?? '')),
                         DataCell(Text(shipping.order.orderId.toString())),
+                        DataCell(Text(shipping.order.orderName)),
+                        DataCell(Text(shipping.order.styleNo)),
                         DataCell(Text(
                             shipping.shippingDate.toIso8601String().split('T').first)),
                         DataCell(Text(shipping.shippedQty.toString())),

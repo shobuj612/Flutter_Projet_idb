@@ -86,6 +86,8 @@ class _SewingListScreenState extends State<SewingListScreen> {
                   columns: const [
                     DataColumn(label: Text("Sewing ID")),
                     DataColumn(label: Text("Order ID")),
+                    DataColumn(label: Text("Order Name")),// this is new added
+                    DataColumn(label: Text("Order StyleNo")),// this is new added
                     DataColumn(label: Text("Start Date")),
                     DataColumn(label: Text("End Date")),
                     DataColumn(label: Text("Quantity")),
@@ -96,6 +98,8 @@ class _SewingListScreenState extends State<SewingListScreen> {
                       cells: [
                         DataCell(Text(sewing.sewingId?.toString() ?? '')),
                         DataCell(Text(sewing.order.orderId?.toString() ?? '')),
+                        DataCell(Text(sewing.order.orderName)),
+                        DataCell(Text(sewing.order.styleNo)),
                         DataCell(Text(sewing.sewingStartDate.toLocal().toString().split(' ')[0])),
                         DataCell(Text(sewing.sewingEndDate.toLocal().toString().split(' ')[0])),
                         DataCell(Text(sewing.sewingQty.toString())),

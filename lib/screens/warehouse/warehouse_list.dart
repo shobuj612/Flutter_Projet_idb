@@ -67,8 +67,10 @@ class _WarehouseListScreenState extends State<WarehouseListScreen> {
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
                   columns: const [
-                    DataColumn(label: Text("ID")),
-                    DataColumn(label: Text("Order Name")),
+                    DataColumn(label: Text("Warehouse ID")),
+                    DataColumn(label: Text("Order Id")),
+                    DataColumn(label: Text("Order Name")),// this is new added
+                    DataColumn(label: Text("Order StyleNo")),// this is new added
                     DataColumn(label: Text("Received Date")),
                     DataColumn(label: Text("Stored Qty")),
                     DataColumn(label: Text("Action")),
@@ -76,7 +78,9 @@ class _WarehouseListScreenState extends State<WarehouseListScreen> {
                   rows: warehouseList.map((w) {
                     return DataRow(cells: [
                       DataCell(Text(w.warehouseId?.toString() ?? '')),
+                      DataCell(Text(w.order.orderId?.toString() ?? '')),
                       DataCell(Text(w.order.orderName)),
+                      DataCell(Text(w.order.styleNo)),
                       DataCell(Text(w.receivedDate.toString().split("T")[0])),
                       DataCell(Text(w.storedQty.toString())),
                       DataCell(Row(
